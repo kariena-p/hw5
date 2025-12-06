@@ -42,10 +42,20 @@ std::set<std::string> wordle(
 
 ////////////////////////////////////////////////////////////////////////////////////////
 bool hasPrefix(const std::set<std::string>& dict, const std::string& pre) {
-    auto it = dict.lower_bound(pre);
-    if(it == dict.end()) return false;
-    return it->compare(0, pre.size(), pre) == 0;
+    std::set<std::string>::const_iterator it = dict.lower_bound(pre);
+    
+    if(it == dict.end()) {
+        return false;
+    }
+
+    // Compare the prefix of *it with pre
+    if(it->compare(0, pre.size(), pre) == 0) {
+        return true;
+    }
+
+    return false;
 }
+
 
 void findValid(const std::string& in,
                const std::string& floating,
